@@ -1,4 +1,4 @@
-import 'package:app_carros/wirdget_carros.dart';
+import 'package:app_carros/widget_carros.dart';
 import 'package:flutter/material.dart';
 
 class TelaPrincipal extends StatelessWidget {

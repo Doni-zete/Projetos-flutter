@@ -29,6 +29,15 @@ void main(){
             color: Colors.purple.shade600,
           ),
         ),
+
+        //aparencia do botão
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style:ElevatedButton.styleFrom(
+            primary: Colors.purple.shade900,
+            textStyle:  TextStyle(
+              fontSize:24,
+            )
+          ))
  
       ),
  
@@ -80,6 +89,7 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
  
             campoTexto('Peso'),
             campoTexto('Altura'),
+            botao('Calcular'),
  
           ],
         ),
@@ -112,6 +122,24 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
         ),
       ),
  
+    );
+  }
+
+
+  //
+  //Botão
+  //
+  Widget botao(rotulo){
+    return Container(
+      width: 250,
+      height: 80,
+      padding: EdgeInsets.only(top:20),
+      child:  ElevatedButton(
+        child: Text(rotulo),
+        onPressed: (){
+          print('botao calcular pressionado!');
+        },
+      ),
     );
   }
  

@@ -12,9 +12,9 @@ void main(){
       // TEMA
       //
       theme: ThemeData(
-        primaryColor: Colors.green.shade900,
+        primaryColor: Colors.purple.shade900,
         backgroundColor: Colors.grey.shade300,
-        focusColor: Colors.grey.shade600,
+        focusColor: Colors.purple.shade600,
  
         textTheme: TextTheme(
           headline1: TextStyle(
@@ -24,7 +24,7 @@ void main(){
  
           headline2: TextStyle(
             fontSize: 24,
-            color: Colors.green.shade900,
+            color: Colors.grey.shade900,
           ),
  
           headline3: TextStyle(
@@ -67,6 +67,10 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
   var txtPeso = TextEditingController();
   var txtAltura = TextEditingController();
  
+  //Declaração da chave que identifica unicamente o formulário
+  var formKey = GlobalKey<FormState>();
+ 
+ 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -78,7 +82,14 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
         actions: [
           IconButton(
             onPressed: (){
-              print('botão pressionado');
+              // print('botão pressionado');
+
+              setState((){
+                formKey.currentState!.reset();
+                txtPeso.text ="";
+                txtAltura.text ="";
+                FocusScope.of(context).unfocus();
+              });
             }, 
             icon: Icon(Icons.refresh),
           ),
@@ -89,19 +100,20 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
  
       body: Container(
         padding: EdgeInsets.all(30),
-        child: Column(
-          children: [
-            Icon(
-              Icons.people,
-              size: 120,
-              color: Theme.of(context).primaryColor,
-            ),
- 
-            campoTexto('Peso', txtPeso),
-            campoTexto('Altura', txtAltura),
-            botao('calcular'),
- 
-          ],
+        child: Form(
+          key: formKey,
+          child: Column(
+            children: [
+              Icon(
+                Icons.people,
+                size: 120,
+                color: Theme.of(context).primaryColor,
+              ),
+              campoTexto('Peso', txtPeso),
+              campoTexto('Altura', txtAltura),
+              botao('calcular'),
+            ],
+          ),
         ),
       ),
       
@@ -138,8 +150,24 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
             ),
             borderRadius: BorderRadius.circular(12),  
           ),
- 
         ),
+ 
+        //
+        // VALIDADOR
+        //
+        validator: (value){
+          value = value!.replaceFirst(',', '.');
+          if (double.tryParse(value) == null){
+            //não foi possível converter o valor para double
+            return 'Entre com um valor numérico';
+          }else{
+            //a conversão foi realizada com sucesso
+            return null;
+          }
+        },
+ 
+ 
+ 
       ),
     );
   }
@@ -157,15 +185,20 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
         onPressed: (){
           //print('botão calcular pressionado!');
  
-          //O método setState permite a manipulação do estado
-          //da UI do App
-          setState(() {
-            double peso = double.parse(txtPeso.text.replaceFirst(',', '.'));
-            double altura = double.parse(txtAltura.text.replaceFirst(',', '.'));
-            double imc = peso / pow(altura, 2);
-            
-            caixaDialogo('IMC: ${imc.toStringAsFixed(2)}');
-          });
+          //
+          // Executar o validador dos Campos de Texto
+          //
+          if (formKey.currentState!.validate()){
+            //O método setState permite a manipulação do estado
+            //da UI do App
+            setState(() {
+              double peso = double.parse(txtPeso.text.replaceFirst(',', '.'));
+              double altura = double.parse(txtAltura.text.replaceFirst(',', '.'));
+              double imc = peso / pow(altura, 2);
+              
+              caixaDialogo('IMC: ${imc.toStringAsFixed(2)}');
+            });
+          }
  
         },
       ),

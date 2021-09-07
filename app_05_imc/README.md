@@ -4,7 +4,7 @@
 ![IMC](https://github.com/Doni-zete/Projetos-flutter/blob/main/app_05_imc/lib/img/imc.gif)
 
 
- Praticas em flutter no qual foi criado um pequeno visualizador de carros  responsivo.
+ Praticas em flutter no qual foi criado um pequeno calculador de imc.
 
 :hammer_and_wrench: **Tecnologias Utilizadas**
 * Flutter

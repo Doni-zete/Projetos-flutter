@@ -20,7 +20,7 @@ class TelaPrincipal extends StatelessWidget {
         color: Colors.indigo[600],
         child: SingleChildScrollView(
           scrollDirection: Axis.vertical,
-          child: Column(
+          child: Row(
             children: [
               Carrowidget('Audi', 'Q8', 'lib/imagens/audi_q8.jpg'),
               Carrowidget('Audi', 'R8', 'lib/imagens/audi_r8.jpg'),

@@ -42,7 +42,7 @@ class Carrowidget extends StatelessWidget {
         borderRadius: BorderRadius.all(Radius.circular(20)),
       ),
 
-      child: Column(
+      child: Row(
         children: [
           Text(
             this.marca,

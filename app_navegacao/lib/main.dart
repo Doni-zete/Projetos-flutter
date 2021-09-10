@@ -16,11 +16,20 @@ void main() {
         't3': (context) => Tela3(),
         't4': (context) => Tela4(),
       },
-
-
     ),
   );
 }
+
+//
+// Classe para Troca de Dados entre as Telas
+//
+class Cadastro{
+  final String nome;
+  final String email;
+  final int idade;
+  Cadastro(this.nome,this.email,this.idade);
+}
+
 
 //
 // TELA 1
@@ -33,6 +42,11 @@ class Tela1 extends StatefulWidget {
 }
 
 class _Tela1State extends State<Tela1> {
+
+  var nome = TextEditingController();
+  var email = TextEditingController();
+  var idade = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -45,16 +59,81 @@ class _Tela1State extends State<Tela1> {
           mainAxisAlignment: MainAxisAlignment.end,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
+            Expanded(
+              child: Container(
+                child: Column(
+                  children: [
 
+                    TextField(
+                      controller: nome,
+                      decoration: InputDecoration(
+                        labelText: 'Nome',
+                        border: OutlineInputBorder(),
+                      ),
+                    ),
+
+                    SizedBox(
+                      height: 10,
+                    ),
+
+                    TextField(
+                      controller: email,
+                      decoration: InputDecoration(
+                        labelText: 'Email',
+                        border: OutlineInputBorder(),
+                      ),
+                    ),
+
+                    SizedBox(
+                      height: 10,
+                    ),
+
+                    TextField(
+                      controller: idade,
+                      decoration: InputDecoration(
+                        labelText: 'Idade',
+                        border: OutlineInputBorder(),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+
+                    TextButton(
+                      onPressed: () {
+
+                        setState(() {
+
+                          //Encapsular os dados que serão
+                          //trocados entre as telas                          
+                          var obj = Cadastro(
+                            nome.text,
+                            email.text,
+                            int.parse(idade.text)
+                          );
+
+                          Navigator.pushNamed(
+                            context, 
+                            't2',
+                            arguments: obj
+                          );
+
+                        });
+
+                      },
+
+                      child: Text('enviar'),
+                    )
+                  ],
+                ),
+              ),
+            ),
             OutlinedButton(
-              onPressed: (){
-
+              onPressed: () {
                 Navigator.pushNamed(context, 't2');
-
-              }, 
+              },
               child: Text('próximo'),
-            ),    
-
+            ),
           ],
         ),
       ),
@@ -75,15 +154,20 @@ class Tela2 extends StatefulWidget {
 class _Tela2State extends State<Tela2> {
   @override
   Widget build(BuildContext context) {
+
+    //
+    // RECUPERAR OS DADOS QUE FORAM TRANSMITIDOS
+    //
+    var obj = ModalRoute.of(context)!.settings.arguments as Cadastro;
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Tela 2'),
-        
+
         //
         // REMOVER O BOTÃO VOLTAR DO APPBAR
         //
-        automaticallyImplyLeading: true,
-
+        automaticallyImplyLeading: false,
       ),
       body: Container(
         padding: EdgeInsets.all(50),
@@ -91,31 +175,38 @@ class _Tela2State extends State<Tela2> {
           mainAxisAlignment: MainAxisAlignment.end,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
+            Text('Nome'),
+            Text(obj.nome, style: TextStyle(fontSize: 24),),
+
+            SizedBox(height: 10,),
+            Text('Email'),
+            Text(obj.email, style: TextStyle(fontSize: 24),),
+
+            SizedBox(height: 10,),
+            Text('Idade'),
+            Text(obj.idade.toString(), style: TextStyle(fontSize: 24),),
+            
+            SizedBox(height: 300,),
             Row(
               children: [
                 Expanded(
                   child: OutlinedButton(
-                    onPressed: (){
+                    onPressed: () {
                       Navigator.pop(context);
-                    }, 
+                    },
                     child: Text('anterior'),
                   ),
-                ),    
-
+                ),
                 Expanded(
                   child: OutlinedButton(
-                    onPressed: (){
+                    onPressed: () {
                       Navigator.pushNamed(context, 't3');
-                    }, 
+                    },
                     child: Text('próximo'),
                   ),
                 ),
               ],
-            ), 
-            
-               
-
-
+            ),
           ],
         ),
       ),
@@ -136,7 +227,33 @@ class Tela3 extends StatelessWidget {
         title: Text('Tela 3'),
       ),
       body: Container(
-        padding: EdgeInsets.all(30),
+        padding: EdgeInsets.all(50),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.end,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Row(
+              children: [
+                Expanded(
+                  child: OutlinedButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    child: Text('anterior'),
+                  ),
+                ),
+                Expanded(
+                  child: OutlinedButton(
+                    onPressed: () {
+                      Navigator.pushNamed(context, 't4');
+                    },
+                    child: Text('próximo'),
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -146,16 +263,28 @@ class Tela3 extends StatelessWidget {
 // TELA 4
 //
 class Tela4 extends StatelessWidget {
-  const Tela4({ Key? key }) : super(key: key);
+  const Tela4({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
- return Scaffold(
+    return Scaffold(
       appBar: AppBar(
         title: Text('Tela 4'),
       ),
       body: Container(
-        padding: EdgeInsets.all(30),
+        padding: EdgeInsets.all(50),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.end,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            OutlinedButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: Text('anterior'),
+            ),
+          ],
+        ),
       ),
     );
   }

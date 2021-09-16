@@ -21,17 +21,15 @@ class TelaPrincipal extends StatefulWidget {
 }
 
 class _TelaPrincipalState extends State<TelaPrincipal> {
-  
   //Index da tela que será carregada
   var telaAtual = 0;
-  
+
   //Controlador utilizado na troca das telas (páginas)
   var pageController = PageController();
-  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
       //
       // BODY
       //
@@ -44,23 +42,20 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
           TelaConfiguracoes(),
         ],
 
-    //Mudança de pagina: quando ocorrer a mudança de pagina
-    //por meio da interação do usuario, e necessario
-    //atualizar o valor da variavel telaAtual
-    onPageChanged: (index){
-      setState(() {
-        telaAtual =index;
-      });
-    },
-
-
+        //Mudança de página: quando ocorrer a mudança de página
+        //por meio da interação do usuário, é necessário
+        //atualizar o valor da variável telaAtual
+        onPageChanged: (index) {
+          setState(() {
+            telaAtual = index;
+          });
+        },
       ),
 
       //
       // BARRA DE NAVEGAÇÃO
       //
       bottomNavigationBar: BottomNavigationBar(
-
         type: BottomNavigationBarType.fixed,
         backgroundColor: Colors.blue.shade900,
 
@@ -75,7 +70,7 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
         //Index do botão selecionado
         currentIndex: telaAtual,
 
-        items:[
+        items: [
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
             label: 'Home',
@@ -94,9 +89,24 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
           ),
         ],
 
+        //Mudança de página através da interação com os
+        //botões do BottomNavigationBar
+        onTap: (index) {
+          
+          //atualizar o valor da variável telaAtual
+          setState(() {
+            telaAtual = index;
+          });
 
+          //efetuar a troca da página
+          pageController.animateToPage(
+            index,
+            duration: Duration(milliseconds: 200),
+            curve: Curves.easeIn,
+          );
+
+        },
       ),
-
     );
   }
 }
@@ -145,7 +155,7 @@ class TelaPesquisar extends StatelessWidget {
 // TELA NOTIFICAÇÕES
 //
 class TelaNotificacoes extends StatelessWidget {
-  const TelaNotificacoes({ Key? key }) : super(key: key);
+  const TelaNotificacoes({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -158,12 +168,11 @@ class TelaNotificacoes extends StatelessWidget {
   }
 }
 
-
 //
 // TELA CONFIGURAÇÕES
 //
 class TelaConfiguracoes extends StatelessWidget {
-  const TelaConfiguracoes({ Key? key }) : super(key: key);
+  const TelaConfiguracoes({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

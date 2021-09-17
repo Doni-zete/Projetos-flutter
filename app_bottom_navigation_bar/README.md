@@ -1,10 +1,14 @@
-# app_bottom_navigation_bar
+ # :computer:NAVEGAR
+  
+######  Layout do Projeto Concluído
+![Navegação entre telas](https://github.com/Doni-zete/Projetos-flutter/blob/main/app_bottom_navigation_bar/lib/img/navegue_bar.gif)
 
-A new Flutter project.
 
-## Getting Started
+ Praticas em flutter no qual foi criado telas de navegação.
 
-This project is a starting point for a Flutter application.
+:hammer_and_wrench: **Tecnologias Utilizadas**
+* Flutter
+* Dart
 
 A few resources to get you started if this is your first Flutter project:
 
@@ -14,3 +18,7 @@ A few resources to get you started if this is your first Flutter project:
 For help getting started with Flutter, view our
 [online documentation](https://flutter.dev/docs), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
+
+
+
+

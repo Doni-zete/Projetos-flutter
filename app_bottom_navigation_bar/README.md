@@ -9,6 +9,7 @@
 :hammer_and_wrench: **Tecnologias Utilizadas**
 * Flutter
 * Dart
+* VS Code
 
 A few resources to get you started if this is your first Flutter project:
 

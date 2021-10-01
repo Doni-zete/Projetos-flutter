@@ -21,6 +21,8 @@ class _TarefasPageState extends State<TarefasPage> {
   //lista dinâmica para armazenamento das tarefas
   var lista = [];
 
+  var txtTarefa = TextEditingController();
+
   @override
   void initState() {
     lista.add("Ir ao supermercado");
@@ -41,6 +43,7 @@ class _TarefasPageState extends State<TarefasPage> {
         centerTitle: true,
         backgroundColor: Colors.blue.shade900,
       ),
+
       body: Container(
         padding: EdgeInsets.all(20),
         color: Colors.grey.shade200,
@@ -66,6 +69,10 @@ class _TarefasPageState extends State<TarefasPage> {
                   lista[index],
                   style: TextStyle(fontSize: 22),
                 ),
+
+                subtitle: Text(
+                    'Lorem Ipsum is simply dummy text of the printing and typesetting industry. '),
+
                 trailing: IconButton(
                   icon: Icon(Icons.delete_outline),
                   onPressed: () {
@@ -79,10 +86,63 @@ class _TarefasPageState extends State<TarefasPage> {
                     });
                   },
                 ),
+
+                //selecionar item da lista
+                hoverColor: Colors.blue.shade100,
+                onTap: () {
+                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                    content: Text('Tarefa selecionada: ${lista[index]}'),
+                    duration: Duration(seconds: 2),
+                  ));
+                },
               ),
             );
           },
         ),
+      ),
+
+      //
+      // ADICIONAR tarefas
+      //
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.blue.shade900,
+        child: Icon(Icons.add),
+        onPressed: () async {
+          await showDialog(
+              context: context,
+              builder: (context) {
+                return AlertDialog(
+                  title: Text(
+                    'Adicionar tarefa',
+                    style: TextStyle(
+                      fontSize: 16,
+                    ),
+                  ),
+                  
+                  content: TextField(
+                    controller: txtTarefa,
+                    style: TextStyle(
+                      fontSize: 24,
+                    ),
+                  ),
+
+                  actions: [
+                    TextButton(
+                      child: Text('ok'),
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                    ),
+                    TextButton(
+                      child: Text('cancelar'),
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                    ),
+                  ],
+                );
+              });
+        },
       ),
     );
   }

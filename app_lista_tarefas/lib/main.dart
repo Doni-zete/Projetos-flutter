@@ -45,7 +45,7 @@ class _TarefasPageState extends State<TarefasPage> {
       ),
 
       body: Container(
-        padding: EdgeInsets.all(20),
+        padding: EdgeInsets.all(30),
         color: Colors.grey.shade200,
 
         //
@@ -54,6 +54,13 @@ class _TarefasPageState extends State<TarefasPage> {
         child: ListView.builder(
           //definir a orientação (horizontal ou vertical)
           scrollDirection: Axis.vertical,
+
+          //separatorBuilder: (context,index){
+          //  return Divider(
+          //    color: Colors.grey.shade400,
+          //    thickness: 1,
+          //  );
+          //},
 
           //definir a quantidade de itens
           itemCount: lista.length,
@@ -104,6 +111,7 @@ class _TarefasPageState extends State<TarefasPage> {
       //
       // ADICIONAR tarefas
       //
+      floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.blue.shade900,
         child: Icon(Icons.add),
@@ -118,18 +126,32 @@ class _TarefasPageState extends State<TarefasPage> {
                       fontSize: 16,
                     ),
                   ),
-                  
                   content: TextField(
                     controller: txtTarefa,
                     style: TextStyle(
                       fontSize: 24,
                     ),
                   ),
-
                   actions: [
                     TextButton(
                       child: Text('ok'),
                       onPressed: () {
+                        setState(() {
+                          var msg = '';
+                          if (txtTarefa.text.isNotEmpty) {
+                            lista.add(txtTarefa.text);
+                            txtTarefa.clear();
+                            msg = 'Tarefa adicionada com sucesso.';
+                          } else {
+                            msg = 'A descrição da tarefa não pode ser vazia.';
+                          }
+
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                            content: Text(msg),
+                            duration: Duration(seconds: 2),
+                          ));
+                        });
+
                         Navigator.pop(context);
                       },
                     ),

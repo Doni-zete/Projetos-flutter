@@ -11,7 +11,7 @@
  Link do Projeto [**IMC**](https://github.com/Doni-zete/Projetos-flutter/tree/main/app_01_imc)
  ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
  
-  # :computer:NAVEGAR
+  # :computer:NAVEGAÇÃO
   
 ######  Layout do Projeto Concluído
 ![Navegação entre telas](https://github.com/Doni-zete/Projetos-flutter/blob/main/app_02_bottom_navigation_bar/lib/img/navegue_bar.gif)

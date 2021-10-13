@@ -7,6 +7,19 @@
 
 
  Praticas em flutter no qual foi criado um pequeno calculador de imc.
+ 
+ Link do Projeto [**IMC**](https://github.com/Doni-zete/Projetos-flutter/tree/main/app_01_imc)
+ ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ 
+  # :computer:NAVEGAR
+  
+######  Layout do Projeto Concluído
+![Navegação entre telas](https://github.com/Doni-zete/Projetos-flutter/blob/main/app_02_bottom_navigation_bar/lib/img/navegue_bar.gif)
+
+Link do Projeto [**Navegação**](https://github.com/Doni-zete/Projetos-flutter/tree/main/app_02_bottom_navigation_bar)
+
+
+ Praticas em flutter no qual foi criado telas de navegação.
 
 :hammer_and_wrench: **Tecnologias Utilizadas**
 * Flutter

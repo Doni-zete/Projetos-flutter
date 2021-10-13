@@ -1,7 +1,5 @@
  # :computer:NAVEGAR
   
-######  Layout do Projeto Concluído
-![Navegação entre telas](https://github.com/Doni-zete/Projetos-flutter/blob/main/app_bottom_navigation_bar/lib/img/navegue_bar.gif)
 
 
  Praticas em flutter no qual foi criado telas de navegação.

@@ -92,7 +92,6 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
         //Mudança de página através da interação com os
         //botões do BottomNavigationBar
         onTap: (index) {
-          
           //atualizar o valor da variável telaAtual
           setState(() {
             telaAtual = index;
@@ -104,7 +103,6 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
             duration: Duration(milliseconds: 200),
             curve: Curves.easeIn,
           );
-
         },
       ),
     );

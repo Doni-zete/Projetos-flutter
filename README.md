@@ -3,7 +3,7 @@
  # :computer:IMC
   IMC
 ######  Layout do Projeto Concluído
-![IMC](https://github.com/Doni-zete/Projetos-flutter/blob/main/app_05_imc/lib/img/imc.gif)
+![IMC](https://github.com/Doni-zete/Projetos-flutter/blob/main/app_01_imc/lib/img/imc.gif)
 
 
  Praticas em flutter no qual foi criado um pequeno calculador de imc.

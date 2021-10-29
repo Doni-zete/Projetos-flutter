@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatefulWidget {
@@ -18,8 +19,8 @@ class _LoginPageState extends State<LoginPage> {
       appBar: AppBar(
           title: const Text('Café Store'),
           centerTitle: true,
-          backgroundColor: Colors.purple),
-      backgroundColor: Colors.white,
+          backgroundColor: Colors.brown),
+      backgroundColor: Colors.brown[50],
       body: Container(
         padding: const EdgeInsets.all(50),
         child: ListView(
@@ -33,12 +34,12 @@ class _LoginPageState extends State<LoginPage> {
               decoration: const InputDecoration(
                   prefixIcon: Icon(Icons.email), labelText: 'Email'),
             ),
-            const SizedBox(height: 30),
+            const SizedBox(height: 20),
             TextField(
               obscureText: true,
               controller: txtSenha,
               style: const TextStyle(
-                color: Colors.black,
+                color: Colors.brown,
                 fontWeight: FontWeight.w300,
               ),
               decoration: const InputDecoration(
@@ -46,9 +47,9 @@ class _LoginPageState extends State<LoginPage> {
             ),
             const SizedBox(height: 40),
             Container(
-              width: 250,
+              width: 150,
               child: OutlinedButton(
-                child: const Text('Entrar'),
+                child: const Text('entrar'),
                 onPressed: () {
                   setState(() {
                     isLoading = true;
@@ -57,9 +58,9 @@ class _LoginPageState extends State<LoginPage> {
                 },
               ),
             ),
-            const SizedBox(height: 70),
+            const SizedBox(height: 60),
             Container(
-              width: 250,
+              width: 150,
               child: TextButton(
                 child: const Text('Criar conta'),
                 onPressed: () {
@@ -67,7 +68,7 @@ class _LoginPageState extends State<LoginPage> {
                 },
               ),
             ),
-            const SizedBox(height: 30),
+            const SizedBox(height: 20),
           ],
         ),
       ),
@@ -77,5 +78,32 @@ class _LoginPageState extends State<LoginPage> {
   //
   // LOGIN com Firebase Auth
   //
-  void login(email, senha) {}
+  void login(email, senha) {
+
+    FirebaseAuth.instance.signInWithEmailAndPassword(email: email, password: senha).then((value) {
+
+      Navigator.pushNamed(context, '/principal');
+
+    }).catchError((erro){
+
+      var mensagem = '';
+      if (erro.code == 'user-not-found'){
+        mensagem = 'ERRO: Usuário não encontrado';
+      }else if (erro.code == 'wrong-password'){
+        mensagem = 'ERRO: Senha incorreta';
+      }else if ( erro.code == 'invalid-email'){
+        mensagem = 'ERRO: Email inválido';
+      }else{
+        mensagem = erro.message;
+      }
+
+      ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(mensagem),
+            duration: const Duration(seconds:2)
+          )
+      );
+
+    });
+  }
 }

@@ -20,8 +20,8 @@ class _CriarContaPageState extends State<CriarContaPage> {
       appBar: AppBar(
           title: const Text('Café Store'),
           centerTitle: true,
-          backgroundColor: Colors.purple),
-      backgroundColor: Colors.white,
+          backgroundColor: Colors.brown),
+      backgroundColor: Colors.brown[50],
       body: Container(
         padding: const EdgeInsets.all(50),
         child: ListView(
@@ -65,7 +65,7 @@ class _CriarContaPageState extends State<CriarContaPage> {
                 Container(
                   width: 150,
                   child: OutlinedButton(
-                    child: const Text('Criar'),
+                    child: const Text('criar'),
                     onPressed: () {
                       criarConta(txtNome.text, txtEmail.text, txtSenha.text);
                     },
@@ -93,23 +93,34 @@ class _CriarContaPageState extends State<CriarContaPage> {
   // CRIAR CONTA no Firebase Auth
   //
   void criarConta(nome, email, senha) {
-    FirebaseAuth.instance.createUserWithEmailAndPassword(
+    FirebaseAuth.instance
+        .createUserWithEmailAndPassword(
       email: email,
       password: senha,
-    )
-    .then((value) {
-
-      //Armazenar o nome completo do usuario
-      FirebaseFirestore.instance.collection('usuarios').doc(value.user!.uid).set(
-        {
-          'nome' :nome,
-          'email': email,
-        }
-      ).then((value) {
-ScaffoldMessenger.of(context).showSnackBar(snackBar)
-      });
-    
-  });
-    
+    ).then((value) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Usuário criado com sucesso!'),
+          duration: Duration(seconds: 2),
+        ),
+      );
+      Navigator.pop(context);
+    }).catchError((erro) {
+      if (erro.code == 'email-already-in-use') {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('ERRO: O email informado já está em uso.'),
+            duration: Duration(seconds: 2),
+          ),
+        );
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('ERRO: ${erro.message}'),
+            duration: const Duration(seconds: 2),
+          ),
+        );
+      }
+    });
   }
 }

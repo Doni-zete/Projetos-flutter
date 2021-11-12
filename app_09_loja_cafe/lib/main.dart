@@ -1,7 +1,8 @@
-import 'package:flutter/material.dart';
 
-import 'criar_conta.dart';
-import 'login.dart';
+import 'package:flutter/material.dart';
+import 'pages/criar_conta.dart';
+import 'pages/inserir_documento.dart';
+import 'pages/login.dart';
 
 void main() {
   runApp(
@@ -12,7 +13,7 @@ void main() {
         '/login': (context) => const LoginPage(),
         '/criar_conta': (context) => const CriarContaPage(),
         '/principal': (context) => const PrincipalPage(),
-        
+        '/inserir': (context) => const InserirDocumentoPage(),
       },
     ),
   );

@@ -12,6 +12,7 @@ void main() {
         '/login': (context) => const LoginPage(),
         '/criar_conta': (context) => const CriarContaPage(),
         '/principal': (context) => const PrincipalPage(),
+        
       },
     ),
   );
